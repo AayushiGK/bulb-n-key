@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img src="{{image.src}}" class="img-fluid">
+        </div>
+        <div class="col-6 my-5 py-4">
+            <p> Image Title: <b>{{image.title}}</b> taken by <b>{{image.author}}</b></p>
+            <p>Description: {{image.description}}</p>
+            <div class="p-2">
+                <form [formGroup]="reviewForm" (ngSubmit)="setAction(reviewForm.value)">
+                    <ngb-rating formControlName="ratingParam" [(rate)]="ratingParam" class="py-3"></ngb-rating>
+                    <div class="form-group">
+                        <input formControlName="user" type="text" class="form-control" placeholder="User Name">
+                    </div>
+                    <div class="form-group">
+                        <textarea formControlName="remark" class="form-control" placeholder="Describe the remarking.!"
+                            rows="5"></textarea>
+                    </div>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
