@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { PullDetailsService } from './pull-details.service';
 
 @Component({
@@ -9,13 +10,16 @@ import { PullDetailsService } from './pull-details.service';
 })
 export class PullDetailsComponent implements OnInit {
 
-  constructor(public fb: FormBuilder, private detailService:PullDetailsService) { }
+  constructor(public fb: FormBuilder, private detailService: PullDetailsService, public route: ActivatedRoute) { }
 
   public reviewForm: FormGroup;
   public photoDetails;
-  public image = { src:"https://cdn.webshopapp.com/shops/178199/files/274798519/1000x1300x2/coco-timberland-high-heels-lace-up-with-platform.jpg",title: 'Heels', author: 'Helen', description: "The Super Footwear which enhance the walk" }
   public ratingParam = 0;
+
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.getPhotoDetails(params.id);
+    });
     this.reviewForm = this.fb.group({
       ratingParam: ['', Validators.compose([Validators.required])],
       user: ['', Validators.compose([Validators.required])],
@@ -26,13 +30,14 @@ export class PullDetailsComponent implements OnInit {
   public getPhotoDetails(photoId) {
     this.detailService.getPhotoDetails(photoId, (data: any) => {
       this.photoDetails = data;
+      console.log('this.photoDetails',this.photoDetails)
     }, (err) => {
       console.log(err.stack);
     });
   }
 
   setAction(formValues) {
-    alert("User: "+formValues.user+" Gave " +formValues.ratingParam+ " Rating saying "+formValues.remark);
+    alert("User: " + formValues.user + " Gave " + formValues.ratingParam + " Rating saying " + formValues.remark);
   }
 
 }

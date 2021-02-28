@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <img src="{{image.src}}" class="img-fluid">
+            <img src="https://live.staticflickr.com/{{photoDetails?.server}}/{{photoDetails?.id}}_{{photoDetails?.secret}}.jpg" class="img-fluid pt-5">
         </div>
         <div class="col-6 my-5 py-4">
-            <p> Image Title: <b>{{image.title}}</b> taken by <b>{{image.author}}</b></p>
-            <p>Description: {{image.description}}</p>
+            <p> Image Title: <b>{{photoDetails?.title._content | titlecase}}</b> taken by <b>{{photoDetails?.owner.username}}</b></p>
+            <p> Description : <b>{{photoDetails?.description._content}}</b></p>
             <div class="p-2">
                 <form [formGroup]="reviewForm" (ngSubmit)="setAction(reviewForm.value)">
                     <ngb-rating formControlName="ratingParam" [(rate)]="ratingParam" class="py-3"></ngb-rating>

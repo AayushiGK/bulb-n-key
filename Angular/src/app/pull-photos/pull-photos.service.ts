@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from '../config.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PullPhotosService {
-  private setHeaders() {
-    const headers = new HttpHeaders({
-      'content-type': 'application/json',
-    });
-    return headers;
-  }
-  constructor(public http: HttpClient, private configUrl: ConfigService) { }
+  public api_key = "8d335b85269dd8fae353324adda7f666";
+  public category = "food";
+  public images_per_page = "20";
+  constructor(public http: HttpClient) { }
 
   getPhotos(callback, errCallback) {
-    const options = { 'headers': this.setHeaders() };
-    this.http.get(this.configUrl.url + '/getPhotos', options).subscribe((data: any) => {
-      callback(data);
+    const API = "https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=" + this.category + "&api_key=" + this.api_key + "&format=json&nojsoncallback=?&per_page=" + this.images_per_page + "&page=1&sort=date-taken-desc"
+    this.http.get(API).subscribe((data: any) => {
+      callback(data.photos.photo);
     }, err => {
       errCallback(err);
     });
