@@ -10,10 +10,10 @@ export class PullPhotosService {
   public images_per_page = "20";
   constructor(public http: HttpClient) { }
 
-  getPhotos(callback, errCallback) {
-    const API = "https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=" + this.category + "&api_key=" + this.api_key + "&format=json&nojsoncallback=?&per_page=" + this.images_per_page + "&page=1&sort=date-taken-desc"
+  getPhotos(pageNo, callback, errCallback) {
+    const API = "https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=" + this.category + "&api_key=" + this.api_key + "&format=json&nojsoncallback=?&per_page=" + this.images_per_page + "&page=" + pageNo + "&sort=date-taken-desc"
     this.http.get(API).subscribe((data: any) => {
-      callback(data.photos.photo);
+      callback(data);
     }, err => {
       errCallback(err);
     });

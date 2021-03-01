@@ -1,8 +1,13 @@
 <div class="container">
     <mat-grid-list cols="3" rowHeight="2:1">
         <mat-grid-tile *ngFor="let image of Photos">
-            <img src='https://live.staticflickr.com/{{image.server}}/{{image.id}}_{{image.secret}}.jpg' routerLink="/pull-photos/{{image.id}}"
-                class="tile-image img-fluid">
+            <!-- <span (newItemEvent)="rating=$event" *ngIf=rating> Rating : {{rating}</span> -->
+            <img src='https://live.staticflickr.com/{{image.server}}/{{image.id}}_{{image.secret}}.jpg'
+                routerLink="/pull-photos/{{image.id}}" class="tile-image img-fluid">
         </mat-grid-tile>
     </mat-grid-list>
+    <div class="footer pb-5 mt-2">
+        <button class="btn btn-dark float-left" type="button" (click)="previousPage($event)" [disabled]=!isPreviousAvail> Previous </button>
+        <button class="btn btn-dark float-right" type="button" (click)="nextPage($event)" [disabled]=!isNextAvail> Next </button>
+    </div>
 </div>
