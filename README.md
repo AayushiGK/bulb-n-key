@@ -1,4 +1,8 @@
 # BulbNKey
+![image](https://user-images.githubusercontent.com/41955105/113501809-a1840d00-9545-11eb-93a1-af24d5ee7d95.png)
+
+![image](https://user-images.githubusercontent.com/41955105/113501807-9e891c80-9545-11eb-80d3-d48b8fa5a119.png)
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
